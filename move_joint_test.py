@@ -14,8 +14,7 @@ def main():
 
     joints = group.get_current_joint_values()
     joints[0] += 0.2
-    joints[1] += 0.4
-    joints[2] += 0.4
+
 
     group.go(joints, wait=True)
     group.stop()
