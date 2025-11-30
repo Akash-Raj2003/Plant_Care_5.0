@@ -1,0 +1,14 @@
+# Ignore the dataset folder (too many files)
+PlantDataset/
+
+# Ignore python cache files
+__pycache__/
+*.pyc
+
+# Ignore large model files (GitHub will reject these if >100MB)
+*.h5
+*.keras
+
+# Ignore virtual environments
+venv/
+env/
