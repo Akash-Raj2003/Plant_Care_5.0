@@ -3,14 +3,10 @@ import numpy as np
 import tensorflow as tf
 from tensorflow.keras.applications.efficientnet import preprocess_input
 
-# --- CONFIG ---
-# 60% is a safer bet. If it's less than 60% sure, it's probably not a plant.
+
 THRESHOLD = 60.0  
 
-# Load model and labels
 print("Loading model...")
-# FIX 1: Make sure this matches your actual file name!
-# We named it 'best_plant_model_deep_tuned.keras' in the last step.
 model = tf.keras.models.load_model('best_plant_model_deep_tuned.keras')
 
 try:
@@ -50,7 +46,7 @@ while True:
 
     # 4. Logic Check
     if raw_confidence < THRESHOLD:
-        label_text = f"Unknown ({raw_confidence:.1f}%)"
+        label_text = f"Unknown"
         color = (0, 0, 255) # Red
     else:
         label_text = f"{best_class}: {raw_confidence:.1f}%"
