@@ -14,22 +14,20 @@ root = tk.Tk()
 root.geometry("1600x1000")  # Set window size
 root.title("Greenhouse GUI")  # Set window title
 
-import tkinter as tk
-
 
 #################################################
 # Stop Button
 ##################################################
 def Stop():
-    log_event(f"User stopped operation")
+    log_event(f"User stopped operation") #update action log by calling log event
     print("Operation stopped")
     if ser:
-        ser.write(b"Stop\n")
+        ser.write(b"Stop\n") #send "stop" to arduino
         ser.flush()
     else:
         print("No serial connection")
 
-# Creating a button with specified options
+# Creating a stop button that calls Stop when pressed
 button = tk.Button(root, 
                    text="Emergency Stop", 
                    command=Stop,
@@ -134,7 +132,7 @@ Status_lb.place(x=800, y=0)
 #################################################
 
 def Camera():
-    cam = tk.Toplevel(root)
+    cam = tk.Toplevel(root) #create a top level root that opens when function called
     cam.title("UR5 Camera")
     cam.geometry("600x600")
 
@@ -142,7 +140,7 @@ def Camera():
     title_label.place(x=150, y=0)
 
     # Load and resize image
-    image = Image.open("flower.png")
+    image = Image.open("flower.png") #open image of flower in folder on top root
     image = image.resize((500, 400))
 
     photo = ImageTk.PhotoImage(image)
@@ -154,7 +152,7 @@ def Camera():
     button1 = tk.Button(cam, text="Exit", command=cam.destroy)
     button1.place(x=375, y=0)
 
-  
+  #when button is pressed, calls camera subroutine
     
 UR5 = tk.Button(root, 
                    text="UR5_Camera", 
@@ -281,14 +279,12 @@ Queue.configure(state ='disabled')
 # ridgeback communication
 #################################################
 
-def on_queue_click(event):
+def on_queue_click(event): # get the line user has clicked
     global selected_plant
-    # get the clicked line text
     idx = Queue.index(f"@{event.x},{event.y}")
     line = Queue.get(f"{idx} linestart", f"{idx} lineend").strip()
 
-    # expects: "Plant 2 is UNDERWATERED" etc
-    if line.startswith("Plant "):
+    if line.startswith("Plant "): #if a plant statement is able to be clicked updates selected plant variable
         try:
             selected_plant = int(line.split()[1])
             status_var.set(f"Status: Selected Plant {selected_plant}")
@@ -299,11 +295,11 @@ Queue.bind("<Button-1>", on_queue_click)
 
 def send_to_ridgeback():
     global selected_plant
-    if selected_plant is None:
+    if selected_plant is None: #wont run if no plant selected
         status_var.set("Status: Click a plant in the job queue first")
         return
 
-    # Send command to robot (change message format to whatever your Arduino expects)
+    # Send command to robot to go to certain plant
     if ser:
         ser.write(f"RIDGEBACK,{selected_plant}\n".encode())
         ser.flush()
@@ -315,11 +311,11 @@ def send_to_ridgeback():
 
     status_var.set(f"Status: Sent Plant {selected_plant} to Ridgeback")
     log_event(f"User decided to water Plant {selected_plant}")
-    selected_plant = None
+    selected_plant = None #ensures no wrong actions after sent message
 
 def reject_plant():
     global selected_plant
-    if selected_plant is None:
+    if selected_plant is None: #wont run if no plant selected
         status_var.set("Status: Click a plant in the job queue first")
         return
 
@@ -328,10 +324,10 @@ def reject_plant():
     Queue.configure(state="disabled")
 
     status_var.set(f"Status: Rejected Plant {selected_plant}")
-    set_plant(selected_plant, 2)
+    set_plant(selected_plant, 2) #sets last status and current status to watered
     last_status[selected_plant] = 2
     log_event(f"User decided to reject Plant {selected_plant}")
-    selected_plant = None
+    selected_plant = None #ensures no wrong actions after rejected
 
 SendBtn = tk.Button(root, text="Send to Ridgeback", command=send_to_ridgeback,
                     font=("Arial", 14, "bold"), bg="lightgreen", bd=3, width=15, height = 3)
@@ -347,7 +343,8 @@ RejectBtn.place(x=1280, y=660)
 Env = tk.Canvas(root, width=1025, height=650, bg="lightblue", highlightthickness=0)
 Env.place(x=25, y=140)
 
-Row1 = Env.create_rectangle(
+#creates tables for plants to lie on
+Row1 = Env.create_rectangle( 
     175, 125, 975, 150,
     fill="white",
     outline="black",
@@ -368,6 +365,7 @@ Row3 = Env.create_rectangle(
     width=3
 )
 
+#creates plants
 plant1 = Env.create_oval(
     190, 85, 240, 135,
     fill="green",
@@ -738,10 +736,11 @@ Robot_lb.place(x=50, y=650)
 
 
 ###########################################
-# Py serial to update colours
+# Py serial and main loop area
 ###########################################
 
-plants = {  # dictionary to store ID values of each plant
+# dictionary to store ID values of each plant
+plants = {  
     1: plant1, 2: plant2, 3: plant3, 4: plant4,
     5: plant5, 6: plant6, 7: plant7, 8: plant8,
     9: plant9, 10: plant10, 11: plant11, 12: plant12,
@@ -760,42 +759,58 @@ from datetime import datetime
 
 action_history = []  # stores all log messages
 
+# Action Log Updating
+#########################################################
+
 def log_event(message):
     timestamp = datetime.now().strftime("%H:%M:%S")
-    entry = f"[{timestamp}] {message}"
+    entry = f"[{timestamp}] {message}" #appends action_history by first placing a timestamp and a message
     action_history.append(entry)
 
 def delete_plant_line(plant_id):
-    pattern = f"Plant {plant_id} is "
+    pattern = f"Plant {plant_id} is " #finds pattern in messages to identify line
     start = "1.0"
 
     while True:
-        idx = Queue.search(pattern, start, tk.END)
+        idx = Queue.search(pattern, start, tk.END)#search for that pattern
         if not idx:
             break
 
         line_start = f"{idx} linestart"
         line_end = f"{idx} lineend+1c"
-        Queue.delete(line_start, line_end)
+        Queue.delete(line_start, line_end)#removes line from job queue
 
         start = line_start
 
+# Plant colour setting
+#######################################################
+
 def set_plant(plant_id, status):
     match status:
-        case 0:
-            colour = "red"
         case 1:
-            colour = "yellow"
+            colour = "yellow" #underwatered
         case 2:
-            colour = "green"
+            colour = "green" # watered
         case 3:
-            colour = "red"
+            colour = "red"  #overwatered
         case _:
-            colour = "grey"
+            colour = "grey" #disconnected
     if plant_id in plants:
         Env.itemconfig(plants[plant_id], fill=colour)
 
+        
 
+def remove_from_queue_if_present(plant_id: int):
+    # remove job-queue line if it exists
+    Queue.configure(state="normal")
+    delete_plant_line(plant_id)
+    Queue.configure(state="disabled")
+
+    # if user had it selected, clear selection
+    global selected_plant
+    if selected_plant == plant_id:
+        selected_plant = None
+        status_var.set("Status: Selected plant went offline")
 
 # Serial setup
 PORT = "COM6"
@@ -805,7 +820,7 @@ queue_positions = {}
 selected_plant = None
 action_history = []  # stores all log messages
 
-# ---------------- SERIAL + OFFLINE LOGIC ----------------
+
 
 from datetime import datetime
 
@@ -813,13 +828,13 @@ ser = None
 
 last_seen = {}
 offline_plants = set()
-OFFLINE_TIMEOUT_S = 5          # test: 2 seconds (set back to 120 later)
-STARTUP_GRACE_S = 2            # allow a tiny grace period before greying never-seen plants
+OFFLINE_TIMEOUT_S = 5          # if not heard from after 5 seconds will go grey
+STARTUP_GRACE_S = 2            # grace period before greying never-seen plants
 start_time = datetime.now()
 
 # Make all plants start grey (unknown) until they report
 for pid in plants.keys():
-    set_plant(pid, -1)         # -1 will map to default/grey in your match
+    set_plant(pid, -1)         # -1 will map to default and set them all grey
 
 
 # Serial setup
@@ -834,29 +849,34 @@ except Exception:
 def poll_serial():
     now = datetime.now()
 
-    # ---- OFFLINE CHECK ----
-    for plant_id in plants.keys():
+
+    for plant_id in plants.keys(): #checks if online 
         seen = last_seen.get(plant_id, None)
 
         # If never seen, treat as offline after startup grace
         if seen is None:
-            if (now - start_time).total_seconds() > STARTUP_GRACE_S:
+            if (now - start_time).total_seconds() > STARTUP_GRACE_S: # if most recent time at sampling time - start time is greater than 5 seconds, state it as disconnected
                 if plant_id not in offline_plants:
-                    offline_plants.add(plant_id)
-                    set_plant(plant_id, -1)  # grey
+                    remove_from_queue_if_present(plant_id)
+                    offline_plants.add(plant_id) 
+                    set_plant(plant_id, -1)  # set colour of plant grey
+                    #offline action
+                    log_event(f"Plant Node {plant_id} is offline")
             continue
 
-        # If seen before, check timeout
-        if (now - seen).total_seconds() > OFFLINE_TIMEOUT_S:
+        # If seen before and now no longer receiving messages
+        if (now - seen).total_seconds() > OFFLINE_TIMEOUT_S: #if greater than 5, set it grey
             if plant_id not in offline_plants:
+                remove_from_queue_if_present(plant_id)
                 offline_plants.add(plant_id)
                 set_plant(plant_id, -1)  # grey
                 log_event(f"Plant {plant_id} offline (no data for {OFFLINE_TIMEOUT_S}s)")
 
-    # ---- SERIAL READ ----
+   # Serial reading
+   ##########################################
     if ser is not None and ser.in_waiting:
         line = ser.readline().decode(errors="ignore").strip()
-        print(line)
+        print(line) #receives incoming Lora request to water each plant
 
         if "," in line:
             a, b = line.split(",", 1)
@@ -864,23 +884,23 @@ def poll_serial():
                 plant_id = int(a)
                 status = int(b)
 
-                # update last seen time
-                last_seen[plant_id] = datetime.now()
+                
+                last_seen[plant_id] = datetime.now() #updates timestamp of when last interacted with
 
                 # bring back online if previously offline
                 if plant_id in offline_plants:
-                    offline_plants.remove(plant_id)
+                    offline_plants.remove(plant_id) #if now online again, mark as now online
                     log_event(f"Plant {plant_id} back online")
 
-                set_plant(plant_id, status)
+                set_plant(plant_id, status) #sets status back from grey to actual
 
-                if last_status.get(plant_id) != status:
+                if last_status.get(plant_id) != status: #ensures same messages to the job queue dont appear again if they have the same status as before, only when status has changed
                     last_status[plant_id] = status
 
                     Queue.configure(state="normal")
-                    delete_plant_line(plant_id)
+                    delete_plant_line(plant_id) #delete old line from this plant
 
-                    if status == 1:
+                    if status == 1: #sends message to action log and job queue accordingly 
                         Queue.insert(tk.END, f"Plant {plant_id} is UNDERWATERED\n")
                         log_event(f"Plant {plant_id} reported UNDERWATERED")
                     elif status == 3:
@@ -894,7 +914,7 @@ def poll_serial():
             except ValueError:
                 pass
 
-    root.after(50, poll_serial)
+    root.after(50, poll_serial) #will re run this subroutine again in 50 ms
 
 
 
