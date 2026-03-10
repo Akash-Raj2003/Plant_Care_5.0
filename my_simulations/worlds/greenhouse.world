@@ -1,0 +1,615 @@
+<sdf version="1.6">
+  <world name="greenhouse_world">
+    <scene>
+      <ambient>0.45 0.45 0.45 1</ambient>
+      <background>0.80 0.87 0.92 1</background>
+      <shadows>true</shadows>
+    </scene>
+
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <physics type="ode">
+      <real_time_update_rate>1000.0</real_time_update_rate>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <!-- Greenhouse floor -->
+    <model name="greenhouse_floor">
+      <static>true</static>
+      <link name="floor_link">
+        <pose>0 0 0.01 0 0 0</pose>
+        <collision name="floor_collision">
+          <geometry>
+            <box>
+              <size>10 6 0.02</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="floor_visual">
+          <geometry>
+            <box>
+              <size>10 6 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.33 0.30 1</ambient>
+            <diffuse>0.45 0.42 0.38 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Greenhouse left wall -->
+    <model name="greenhouse_wall_left">
+      <static>true</static>
+      <link name="wall_left_link">
+        <pose>0 3.0 1.0 0 0 0</pose>
+        <collision name="wall_left_collision">
+          <geometry>
+            <box>
+              <size>10 0.08 2.0</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="wall_left_visual">
+          <geometry>
+            <box>
+              <size>10 0.08 2.0</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.75 0.90 0.85 0.35</ambient>
+            <diffuse>0.75 0.90 0.85 0.35</diffuse>
+          </material>
+          <transparency>0.55</transparency>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Greenhouse right wall -->
+    <model name="greenhouse_wall_right">
+      <static>true</static>
+      <link name="wall_right_link">
+        <pose>0 -3.0 1.0 0 0 0</pose>
+        <collision name="wall_right_collision">
+          <geometry>
+            <box>
+              <size>10 0.08 2.0</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="wall_right_visual">
+          <geometry>
+            <box>
+              <size>10 0.08 2.0</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.75 0.90 0.85 0.35</ambient>
+            <diffuse>0.75 0.90 0.85 0.35</diffuse>
+          </material>
+          <transparency>0.55</transparency>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Greenhouse back wall -->
+    <model name="greenhouse_wall_back">
+      <static>true</static>
+      <link name="wall_back_link">
+        <pose>-5.0 0 1.0 0 0 0</pose>
+        <collision name="wall_back_collision">
+          <geometry>
+            <box>
+              <size>0.08 6 2.0</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="wall_back_visual">
+          <geometry>
+            <box>
+              <size>0.08 6 2.0</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.75 0.90 0.85 0.35</ambient>
+            <diffuse>0.75 0.90 0.85 0.35</diffuse>
+          </material>
+          <transparency>0.55</transparency>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Greenhouse front wall split into two pieces for a center entrance -->
+    <model name="greenhouse_wall_front_left">
+      <static>true</static>
+      <link name="wall_front_left_link">
+        <pose>5.0 2.1 1.0 0 0 0</pose>
+        <collision name="wall_front_left_collision">
+          <geometry>
+            <box>
+              <size>0.08 1.8 2.0</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="wall_front_left_visual">
+          <geometry>
+            <box>
+              <size>0.08 1.8 2.0</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.75 0.90 0.85 0.35</ambient>
+            <diffuse>0.75 0.90 0.85 0.35</diffuse>
+          </material>
+          <transparency>0.55</transparency>
+        </visual>
+      </link>
+    </model>
+
+    <model name="greenhouse_wall_front_right">
+      <static>true</static>
+      <link name="wall_front_right_link">
+        <pose>5.0 -2.1 1.0 0 0 0</pose>
+        <collision name="wall_front_right_collision">
+          <geometry>
+            <box>
+              <size>0.08 1.8 2.0</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="wall_front_right_visual">
+          <geometry>
+            <box>
+              <size>0.08 1.8 2.0</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.75 0.90 0.85 0.35</ambient>
+            <diffuse>0.75 0.90 0.85 0.35</diffuse>
+          </material>
+          <transparency>0.55</transparency>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Left planter row -->
+    <model name="planter_row_left">
+      <static>true</static>
+      <link name="planter_row_left_link">
+        <pose>0 1.35 0.18 0 0 0</pose>
+        <collision name="planter_row_left_collision">
+          <geometry>
+            <box>
+              <size>8.4 0.55 0.36</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="planter_row_left_visual">
+          <geometry>
+            <box>
+              <size>8.4 0.55 0.36</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.30 0.20 0.12 1</ambient>
+            <diffuse>0.35 0.23 0.14 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Right planter row -->
+    <model name="planter_row_right">
+      <static>true</static>
+      <link name="planter_row_right_link">
+        <pose>0 -1.35 0.18 0 0 0</pose>
+        <collision name="planter_row_right_collision">
+          <geometry>
+            <box>
+              <size>8.4 0.55 0.36</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="planter_row_right_visual">
+          <geometry>
+            <box>
+              <size>8.4 0.55 0.36</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.30 0.20 0.12 1</ambient>
+            <diffuse>0.35 0.23 0.14 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Left row plants -->
+    <model name="plant_l1">
+      <static>true</static>
+      <link name="plant_l1_link">
+        <pose>-3.0 1.35 0.45 0 0 0</pose>
+        <collision name="plant_l1_collision">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="plant_l1_visual">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.20 0.55 0.22 1</ambient>
+            <diffuse>0.24 0.65 0.25 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="plant_l2">
+      <static>true</static>
+      <link name="plant_l2_link">
+        <pose>-2.0 1.35 0.45 0 0 0</pose>
+        <collision name="plant_l2_collision">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="plant_l2_visual">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.20 0.55 0.22 1</ambient>
+            <diffuse>0.24 0.65 0.25 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="plant_l3">
+      <static>true</static>
+      <link name="plant_l3_link">
+        <pose>-1.0 1.35 0.45 0 0 0</pose>
+        <collision name="plant_l3_collision">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="plant_l3_visual">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.20 0.55 0.22 1</ambient>
+            <diffuse>0.24 0.65 0.25 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="plant_l4">
+      <static>true</static>
+      <link name="plant_l4_link">
+        <pose>0.0 1.35 0.45 0 0 0</pose>
+        <collision name="plant_l4_collision">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="plant_l4_visual">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.20 0.55 0.22 1</ambient>
+            <diffuse>0.24 0.65 0.25 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="plant_l5">
+      <static>true</static>
+      <link name="plant_l5_link">
+        <pose>1.0 1.35 0.45 0 0 0</pose>
+        <collision name="plant_l5_collision">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="plant_l5_visual">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.20 0.55 0.22 1</ambient>
+            <diffuse>0.24 0.65 0.25 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="plant_l6">
+      <static>true</static>
+      <link name="plant_l6_link">
+        <pose>2.0 1.35 0.45 0 0 0</pose>
+        <collision name="plant_l6_collision">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="plant_l6_visual">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.20 0.55 0.22 1</ambient>
+            <diffuse>0.24 0.65 0.25 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="plant_l7">
+      <static>true</static>
+      <link name="plant_l7_link">
+        <pose>3.0 1.35 0.45 0 0 0</pose>
+        <collision name="plant_l7_collision">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="plant_l7_visual">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.20 0.55 0.22 1</ambient>
+            <diffuse>0.24 0.65 0.25 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Right row plants -->
+    <model name="plant_r1">
+      <static>true</static>
+      <link name="plant_r1_link">
+        <pose>-3.0 -1.35 0.45 0 0 0</pose>
+        <collision name="plant_r1_collision">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="plant_r1_visual">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.20 0.55 0.22 1</ambient>
+            <diffuse>0.24 0.65 0.25 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="plant_r2">
+      <static>true</static>
+      <link name="plant_r2_link">
+        <pose>-2.0 -1.35 0.45 0 0 0</pose>
+        <collision name="plant_r2_collision">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="plant_r2_visual">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.20 0.55 0.22 1</ambient>
+            <diffuse>0.24 0.65 0.25 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="plant_r3">
+      <static>true</static>
+      <link name="plant_r3_link">
+        <pose>-1.0 -1.35 0.45 0 0 0</pose>
+        <collision name="plant_r3_collision">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="plant_r3_visual">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.20 0.55 0.22 1</ambient>
+            <diffuse>0.24 0.65 0.25 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="plant_r4">
+      <static>true</static>
+      <link name="plant_r4_link">
+        <pose>0.0 -1.35 0.45 0 0 0</pose>
+        <collision name="plant_r4_collision">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="plant_r4_visual">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.20 0.55 0.22 1</ambient>
+            <diffuse>0.24 0.65 0.25 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="plant_r5">
+      <static>true</static>
+      <link name="plant_r5_link">
+        <pose>1.0 -1.35 0.45 0 0 0</pose>
+        <collision name="plant_r5_collision">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="plant_r5_visual">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.20 0.55 0.22 1</ambient>
+            <diffuse>0.24 0.65 0.25 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="plant_r6">
+      <static>true</static>
+      <link name="plant_r6_link">
+        <pose>2.0 -1.35 0.45 0 0 0</pose>
+        <collision name="plant_r6_collision">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="plant_r6_visual">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.20 0.55 0.22 1</ambient>
+            <diffuse>0.24 0.65 0.25 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="plant_r7">
+      <static>true</static>
+      <link name="plant_r7_link">
+        <pose>3.0 -1.35 0.45 0 0 0</pose>
+        <collision name="plant_r7_collision">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="plant_r7_visual">
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.50</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.20 0.55 0.22 1</ambient>
+            <diffuse>0.24 0.65 0.25 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>
