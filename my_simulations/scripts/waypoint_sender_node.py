@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+from collections import deque
+
 import rospy
 from geometry_msgs.msg import PoseStamped
 from plant_msgs.msg import PlantMoisture
@@ -25,9 +27,12 @@ complete = 4
 
 waypoint_publisher = None
 state_publisher = None
+plant_queue = deque()
+queued_plants = set()
+auto_dispatch_queue = True
 
 
-def send_waypoint(plant):
+def create_waypoint(plant):
     # Create a PoseStamped waypoint for the given plant name.
 
     if plant in plant_dict:
@@ -52,6 +57,36 @@ def send_waypoint(plant):
         return None
 
 
+def queue_plant(plant_id):
+    if plant_id in queued_plants:
+        rospy.loginfo("Plant %d is already queued. Current queue: %s", plant_id, list(plant_queue))
+        return False
+
+    plant_queue.append(plant_id)
+    queued_plants.add(plant_id)
+    rospy.loginfo("Queued plant %d. Current queue: %s", plant_id, list(plant_queue))
+    return True
+
+
+def publish_next_waypoint():
+    if not plant_queue:
+        rospy.loginfo("Plant queue is empty. No waypoint published.")
+        return None
+
+    plant_id = plant_queue[0]
+    waypoint = create_waypoint(plant_id)
+
+    if waypoint is None:
+        plant_queue.popleft()
+        queued_plants.discard(plant_id)
+        rospy.logwarn("Removed plant %d from queue because no waypoint was found.", plant_id)
+        return None
+
+    waypoint_publisher.publish(waypoint)
+    rospy.loginfo("Published waypoint for queued plant %d", plant_id)
+    return plant_id
+
+
 def plant_callback(msg):
     # Callback triggered whenever plant moisture data is received.
     rospy.loginfo(
@@ -63,19 +98,23 @@ def plant_callback(msg):
 
     if msg.low_moisture:
         plant_id = msg.plant_id
-        rospy.loginfo("Plant %d has low moisture. Sending waypoint to Ridgeback.", plant_id)
+        rospy.loginfo("Plant %d has low moisture. Adding request to queue.", plant_id)
 
-        waypoint = send_waypoint(plant_id)
+        plant_was_added = queue_plant(plant_id)
+        queue_was_empty_before_add = len(plant_queue) == 1
 
-        if waypoint is not None:
-            waypoint_publisher.publish(waypoint)
-            rospy.loginfo("Published waypoint for Plant %d", plant_id)
+        # If auto dispatch is enabled, send the first queued plant immediately.
+        # Later plants stay queued until another part of the state logic asks for
+        # the next waypoint to be published.
+        if auto_dispatch_queue and plant_was_added and queue_was_empty_before_add:
+            publish_next_waypoint()
 
 
 if __name__ == '__main__':
     rospy.init_node('waypoint_sender_node')
     rospy.loginfo("Waypoint sender node started.")
 
+    auto_dispatch_queue = rospy.get_param("~auto_dispatch_queue", True)
     waypoint_publisher = rospy.Publisher('/move_base_simple/goal', PoseStamped, queue_size=10)
     state_publisher = rospy.Publisher('/ridgeback/state', Int32, queue_size=10)
 
@@ -85,4 +124,5 @@ if __name__ == '__main__':
         plant_callback
     )
 
+    rospy.loginfo("Plant queue ready. auto_dispatch_queue=%s", auto_dispatch_queue)
     rospy.spin()
