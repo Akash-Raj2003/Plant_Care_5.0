@@ -3,7 +3,9 @@ import rospy
 import json
 import sys
 import os
+import math
 from geometry_msgs.msg import PoseWithCovarianceStamped
+from tf.transformations import euler_from_quaternion # Added for yaw conversion
 
 class AddPlant:
 
@@ -17,7 +19,7 @@ class AddPlant:
         self.plant_db = self.load()
         
         self.sub = rospy.Subscriber('/amcl_pose', PoseWithCovarianceStamped, self.pose_callback)
-        self.current_pose = None
+        self.current_pose = None # This will now store the full pose message
 
     def load(self):
         """Checks if the greenhouse file exists and loads it."""
@@ -32,7 +34,8 @@ class AddPlant:
         return {}
 
     def pose_callback(self, msg):
-        self.current_pose = msg.pose.pose.position
+        # Store the entire pose so we can access position AND orientation
+        self.current_pose = msg.pose.pose
 
     def record(self):
         print(f"--- Appending to: {self.filename} ---")
@@ -43,21 +46,29 @@ class AddPlant:
                 break
             
             if self.current_pose:
-                # Add or update the plant entry in the dictionary
+                # 1. Extract Quaternion from the pose
+                orient = self.current_pose.orientation
+                quaternion = (orient.x, orient.y, orient.z, orient.w)
+                
+                # 2. Convert Quaternion to Euler (Roll, Pitch, Yaw)
+                # We only care about the 3rd value (Yaw)
+                _, _, yaw = euler_from_quaternion(quaternion)
+
+                # 3. Add or update the plant entry in the dictionary
                 self.plant_db[name] = {
                     "plant_id": len(self.plant_db) + 1,
-                    "x": round(self.current_pose.x, 3),
-                    "y": round(self.current_pose.y, 3),
-                    "z": round(self.current_pose.z, 3),
+                    "x": round(self.current_pose.position.x, 3),
+                    "y": round(self.current_pose.position.y, 3),
+                    "z": round(self.current_pose.position.z, 3),
+                    "yaw": round(yaw, 3), # Added Yaw here
                     "moisture_level": 0.0,
                     "moisture_alert": False
                 }
-                print(f"Added {name}. Total plants in library: {len(self.plant_db)}")
+                print(f"Added {name} at Yaw: {round(yaw, 3)}. Total: {len(self.plant_db)}")
             else:
                 print("Waiting for AMCL localization...")
 
     def save(self):
-        # Create directory if it doesn't exist
         if not os.path.exists(self.config_dir):
             os.makedirs(self.config_dir)
             
@@ -67,7 +78,6 @@ class AddPlant:
         print(f"Saved {len(self.plant_db)} plants to {self.filename}")
 
 if __name__ == '__main__':
-    # Usage: rosrun greenhouse_project add_plant4.py my_greenhouse_name
     gh_name = sys.argv[1] if len(sys.argv) > 1 else "greenhouse_1"
     adder = AddPlant(gh_name)
     adder.record()
