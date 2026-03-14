@@ -4,6 +4,7 @@
         "x": 3.46,
         "y": 4.525,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -12,6 +13,7 @@
         "x": 5.176,
         "y": 4.499,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -20,6 +22,7 @@
         "x": 6.449,
         "y": 4.485,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -28,6 +31,7 @@
         "x": 7.881,
         "y": 4.465,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -36,6 +40,7 @@
         "x": 9.753,
         "y": 4.431,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -44,6 +49,7 @@
         "x": 11.414,
         "y": 4.419,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -52,6 +58,7 @@
         "x": 12.971,
         "y": 4.398,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -60,6 +67,7 @@
         "x": 14.631,
         "y": 4.386,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -68,6 +76,7 @@
         "x": 15.989,
         "y": 4.365,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -76,6 +85,7 @@
         "x": 17.044,
         "y": 4.357,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -84,6 +94,7 @@
         "x": 18.622,
         "y": 4.353,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -92,6 +103,7 @@
         "x": 19.982,
         "y": 4.34,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -100,6 +112,7 @@
         "x": 20.985,
         "y": 4.34,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -108,6 +121,7 @@
         "x": 22.478,
         "y": 4.327,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -116,6 +130,7 @@
         "x": 3.277,
         "y": -0.396,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -124,6 +139,7 @@
         "x": 5.185,
         "y": -0.405,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -132,6 +148,7 @@
         "x": 6.838,
         "y": -0.407,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -140,6 +157,7 @@
         "x": 7.92,
         "y": -0.4,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -148,6 +166,7 @@
         "x": 9.933,
         "y": -0.434,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -156,6 +175,7 @@
         "x": 11.982,
         "y": -0.455,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -164,6 +184,7 @@
         "x": 13.821,
         "y": -0.461,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -172,6 +193,7 @@
         "x": 15.149,
         "y": -0.478,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -180,6 +202,7 @@
         "x": 16.52,
         "y": -0.483,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -188,6 +211,7 @@
         "x": 18.109,
         "y": -0.487,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -196,6 +220,7 @@
         "x": 19.356,
         "y": -0.493,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -204,6 +229,7 @@
         "x": 20.546,
         "y": -0.523,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -212,6 +238,7 @@
         "x": 21.764,
         "y": -0.537,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -220,6 +247,7 @@
         "x": 23.126,
         "y": -0.523,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -228,6 +256,7 @@
         "x": 22.763,
         "y": 1.778,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -236,6 +265,7 @@
         "x": 21.254,
         "y": 1.687,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -244,6 +274,7 @@
         "x": 20.221,
         "y": 1.683,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -252,6 +283,7 @@
         "x": 19.152,
         "y": 1.676,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -260,6 +292,7 @@
         "x": 18.008,
         "y": 1.655,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -268,6 +301,7 @@
         "x": 16.726,
         "y": 1.642,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -276,6 +310,7 @@
         "x": 15.368,
         "y": 1.77,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -284,6 +319,7 @@
         "x": 13.744,
         "y": 1.753,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -292,6 +328,7 @@
         "x": 12.19,
         "y": 1.75,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -300,6 +337,7 @@
         "x": 10.327,
         "y": 1.796,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -308,6 +346,7 @@
         "x": 8.36,
         "y": 1.837,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -316,6 +355,7 @@
         "x": 6.972,
         "y": 1.847,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -324,6 +364,7 @@
         "x": 5.504,
         "y": 1.868,
         "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     },
@@ -332,6 +373,142 @@
         "x": 3.947,
         "y": 1.88,
         "z": 0.0,
+        "yaw": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_301": {
+        "plant_id": 43,
+        "x": 3.515,
+        "y": 6.765,
+        "z": 0.0,
+        "yaw": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_302": {
+        "plant_id": 44,
+        "x": 5.453,
+        "y": 6.779,
+        "z": 0.0,
+        "yaw": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_303": {
+        "plant_id": 45,
+        "x": 6.274,
+        "y": 6.753,
+        "z": 0.0,
+        "yaw": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_304": {
+        "plant_id": 46,
+        "x": 7.75,
+        "y": 6.705,
+        "z": 0.0,
+        "yaw": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_305": {
+        "plant_id": 47,
+        "x": 9.177,
+        "y": 6.7,
+        "z": 0.0,
+        "yaw": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_306": {
+        "plant_id": 48,
+        "x": 10.485,
+        "y": 6.707,
+        "z": 0.0,
+        "yaw": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_307": {
+        "plant_id": 49,
+        "x": 12.049,
+        "y": 6.697,
+        "z": 0.0,
+        "yaw": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_308": {
+        "plant_id": 50,
+        "x": 13.709,
+        "y": 6.696,
+        "z": 0.0,
+        "yaw": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_309": {
+        "plant_id": 51,
+        "x": 15.453,
+        "y": 6.706,
+        "z": 0.0,
+        "yaw": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_310": {
+        "plant_id": 52,
+        "x": 16.974,
+        "y": 6.575,
+        "z": 0.0,
+        "yaw": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_311": {
+        "plant_id": 53,
+        "x": 18.242,
+        "y": 6.578,
+        "z": 0.0,
+        "yaw": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_312": {
+        "plant_id": 54,
+        "x": 19.374,
+        "y": 6.581,
+        "z": 0.0,
+        "yaw": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_313": {
+        "plant_id": 55,
+        "x": 20.279,
+        "y": 6.577,
+        "z": 0.0,
+        "yaw": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_314": {
+        "plant_id": 56,
+        "x": 21.23,
+        "y": 6.585,
+        "z": 0.0,
+        "yaw": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_315": {
+        "plant_id": 57,
+        "x": 22.647,
+        "y": 6.607,
+        "z": 0.0,
+        "yaw": 0.0,
         "moisture_level": 0.0,
         "moisture_alert": false
     }

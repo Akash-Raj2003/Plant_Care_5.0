@@ -1,0 +1,412 @@
+{
+    "Plant_001": {
+        "plant_id": 1,
+        "x": 3.432,
+        "y": -0.879,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_003": {
+        "plant_id": 48,
+        "x": 7.555,
+        "y": -0.786,
+        "z": 0.0,
+        "yaw": -0.045,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_004": {
+        "plant_id": 26,
+        "x": 9.399,
+        "y": -0.73,
+        "z": 0.0,
+        "yaw": -0.022,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_008": {
+        "plant_id": 4,
+        "x": 16.413,
+        "y": -0.919,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_101": {
+        "plant_id": 5,
+        "x": 2.924,
+        "y": 1.633,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_103": {
+        "plant_id": 6,
+        "x": 7.057,
+        "y": 1.533,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_105": {
+        "plant_id": 7,
+        "x": 10.546,
+        "y": 1.447,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_108": {
+        "plant_id": 8,
+        "x": 16.239,
+        "y": 1.357,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_208": {
+        "plant_id": 9,
+        "x": 17.328,
+        "y": 3.234,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_205": {
+        "plant_id": 10,
+        "x": 11.318,
+        "y": 3.254,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_203": {
+        "plant_id": 11,
+        "x": 7.736,
+        "y": 3.37,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_201": {
+        "plant_id": 12,
+        "x": 3.001,
+        "y": 3.454,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_301": {
+        "plant_id": 13,
+        "x": 2.273,
+        "y": 5.726,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_303": {
+        "plant_id": 14,
+        "x": 6.982,
+        "y": 5.566,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_305": {
+        "plant_id": 15,
+        "x": 10.714,
+        "y": 5.484,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_308": {
+        "plant_id": 16,
+        "x": 16.714,
+        "y": 5.397,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_408": {
+        "plant_id": 17,
+        "x": 17.276,
+        "y": 7.142,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_405": {
+        "plant_id": 18,
+        "x": 10.88,
+        "y": 7.33,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_403": {
+        "plant_id": 19,
+        "x": 7.01,
+        "y": 7.437,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_401": {
+        "plant_id": 20,
+        "x": 2.968,
+        "y": 7.531,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_501": {
+        "plant_id": 21,
+        "x": 2.565,
+        "y": 9.574,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_503": {
+        "plant_id": 22,
+        "x": 6.378,
+        "y": 9.578,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_505": {
+        "plant_id": 23,
+        "x": 11.028,
+        "y": 9.501,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_508": {
+        "plant_id": 24,
+        "x": 16.863,
+        "y": 9.389,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_002": {
+        "plant_id": 25,
+        "x": 5.479,
+        "y": -0.671,
+        "z": 0.0,
+        "yaw": -0.011,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_006": {
+        "plant_id": 26,
+        "x": 12.52,
+        "y": -0.754,
+        "z": 0.0,
+        "yaw": -0.002,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_007": {
+        "plant_id": 27,
+        "x": 14.829,
+        "y": -0.781,
+        "z": 0.0,
+        "yaw": -0.01,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_107": {
+        "plant_id": 28,
+        "x": 14.357,
+        "y": 1.372,
+        "z": 0.0,
+        "yaw": 3.129,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_106": {
+        "plant_id": 29,
+        "x": 12.282,
+        "y": 1.379,
+        "z": 0.0,
+        "yaw": 3.125,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_104": {
+        "plant_id": 30,
+        "x": 8.662,
+        "y": 1.488,
+        "z": 0.0,
+        "yaw": 3.106,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_102": {
+        "plant_id": 31,
+        "x": 4.978,
+        "y": 1.55,
+        "z": 0.0,
+        "yaw": -3.112,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_202": {
+        "plant_id": 32,
+        "x": 5.024,
+        "y": 3.459,
+        "z": 0.0,
+        "yaw": -3.114,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_204": {
+        "plant_id": 33,
+        "x": 9.387,
+        "y": 3.443,
+        "z": 0.0,
+        "yaw": 0.021,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_206": {
+        "plant_id": 34,
+        "x": 12.742,
+        "y": 3.338,
+        "z": 0.0,
+        "yaw": -0.032,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_207": {
+        "plant_id": 35,
+        "x": 15.126,
+        "y": 3.166,
+        "z": 0.0,
+        "yaw": -3.034,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_307": {
+        "plant_id": 36,
+        "x": 14.497,
+        "y": 5.425,
+        "z": 0.0,
+        "yaw": 3.089,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_306": {
+        "plant_id": 37,
+        "x": 12.521,
+        "y": 5.492,
+        "z": 0.0,
+        "yaw": 3.135,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_304": {
+        "plant_id": 38,
+        "x": 8.958,
+        "y": 5.506,
+        "z": 0.0,
+        "yaw": -3.13,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_302": {
+        "plant_id": 39,
+        "x": 4.996,
+        "y": 5.588,
+        "z": 0.0,
+        "yaw": 3.12,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_402": {
+        "plant_id": 40,
+        "x": 5.557,
+        "y": 7.42,
+        "z": 0.0,
+        "yaw": 0.049,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_404": {
+        "plant_id": 41,
+        "x": 9.314,
+        "y": 7.436,
+        "z": 0.0,
+        "yaw": -0.042,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_406": {
+        "plant_id": 42,
+        "x": 12.72,
+        "y": 7.294,
+        "z": 0.0,
+        "yaw": 0.004,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_407": {
+        "plant_id": 43,
+        "x": 15.042,
+        "y": 7.326,
+        "z": 0.0,
+        "yaw": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_507": {
+        "plant_id": 44,
+        "x": 14.853,
+        "y": 9.471,
+        "z": 0.0,
+        "yaw": 3.12,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_506": {
+        "plant_id": 45,
+        "x": 12.123,
+        "y": 9.512,
+        "z": 0.0,
+        "yaw": -3.111,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_504": {
+        "plant_id": 46,
+        "x": 8.924,
+        "y": 9.49,
+        "z": 0.0,
+        "yaw": -3.142,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_502": {
+        "plant_id": 47,
+        "x": 5.134,
+        "y": 9.548,
+        "z": 0.0,
+        "yaw": 3.096,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "Plant_005": {
+        "plant_id": 48,
+        "x": 10.628,
+        "y": -0.743,
+        "z": 0.0,
+        "yaw": 0.003,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    }
+}
