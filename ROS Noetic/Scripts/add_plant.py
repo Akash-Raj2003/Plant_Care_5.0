@@ -5,7 +5,7 @@ import sys
 import os
 import math
 from geometry_msgs.msg import PoseWithCovarianceStamped
-from tf.transformations import euler_from_quaternion # Added for yaw conversion
+from tf.transformations import euler_from_quaternion 
 
 class AddPlant:
 
@@ -19,7 +19,7 @@ class AddPlant:
         self.plant_db = self.load()
         
         self.sub = rospy.Subscriber('/amcl_pose', PoseWithCovarianceStamped, self.pose_callback)
-        self.current_pose = None # This will now store the full pose message
+        self.current_pose = None 
 
     def load(self):
         """Checks if the greenhouse file exists and loads it."""
@@ -46,21 +46,21 @@ class AddPlant:
                 break
             
             if self.current_pose:
-                # 1. Extract Quaternion from the pose
+                # Extract Quaternion from the pose
                 orient = self.current_pose.orientation
                 quaternion = (orient.x, orient.y, orient.z, orient.w)
                 
-                # 2. Convert Quaternion to Euler (Roll, Pitch, Yaw)
+                # Convert Quaternion to Euler (Roll, Pitch, Yaw)
                 # We only care about the 3rd value (Yaw)
                 _, _, yaw = euler_from_quaternion(quaternion)
 
-                # 3. Add or update the plant entry in the dictionary
+                # Add or update the plant entry in the dictionary
                 self.plant_db[name] = {
                     "plant_id": len(self.plant_db) + 1,
                     "x": round(self.current_pose.position.x, 3),
                     "y": round(self.current_pose.position.y, 3),
                     "z": round(self.current_pose.position.z, 3),
-                    "yaw": round(yaw, 3), # Added Yaw here
+                    "yaw": round(yaw, 3),
                     "moisture_level": 0.0,
                     "moisture_alert": False
                 }
