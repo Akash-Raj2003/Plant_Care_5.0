@@ -10,7 +10,7 @@ from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from geometry_msgs.msg import PoseWithCovarianceStamped, Twist, Quaternion
 from nav_msgs.msg import Path
 from std_srvs.srv import Empty
-from tf.transformations import quaternion_from_euler # Added for yaw conversion
+from tf.transformations import quaternion_from_euler
 
 class RidgebackTester:
     def __init__(self, greenhouse_name):
@@ -83,7 +83,7 @@ class RidgebackTester:
             name = test_queue[idx]
             data = self.plants[name]
             
-            # Extract data from JSON
+            # Extract data from JSON plant nodes
             target_x = data.get('x', 0.0)
             target_y = data.get('y', 0.0)
             target_yaw = data.get('yaw', 0.0)
@@ -103,7 +103,7 @@ class RidgebackTester:
             goal.target_pose.header.stamp = rospy.Time.now()
             goal.target_pose.pose.position.x = target_x
             goal.target_pose.pose.position.y = target_y
-            goal.target_pose.pose.orientation = q # Now using the converted yaw
+            goal.target_pose.pose.orientation = q 
 
             self.client.send_goal(goal)
             start_time = time.time()
@@ -115,7 +115,7 @@ class RidgebackTester:
                 deviation = self.get_path_deviation()
                 elapsed_total = time.time() - start_time
 
-                # 1. SUCCESS CHECK
+                # SUCCESS CHECK
                 if state == 3 or error < PRECISION_GOAL:
                     rospy.loginfo(f"SUCCESS: Reached {name} in {elapsed_total:.1f}s")
                     self.client.cancel_goal()
@@ -127,13 +127,13 @@ class RidgebackTester:
                     })
                     break
 
-                # 2. ABORTED CHECK (Status 4)
+                # ABORTED CHECK (Status 4)
                 if state == 4:
                     rospy.logwarn(f"ABORTED: ROS gave up on {name}. Re-queueing...")
                     test_queue.append(name)
                     break
 
-                # 3. PATH DEVIATION MONITOR
+                # PATH DEVIATION MONITOR
                 if deviation > MAX_DEVIATION:
                     if drift_start_time is None:
                         drift_start_time = time.time()
@@ -146,7 +146,7 @@ class RidgebackTester:
                 else:
                     drift_start_time = None 
 
-                # 4. MASTER SAFETY TIMEOUT
+                # TIMEOUT
                 if elapsed_total > MAX_TOTAL_TIME:
                     rospy.logerr(f"CRITICAL TIMEOUT: Goal {name} took too long. Moving on.")
                     self.client.cancel_goal()
