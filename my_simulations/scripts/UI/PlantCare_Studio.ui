@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PlantCareStudioWindow</class>
+ <widget class="QMainWindow" name="PlantCareStudioWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1600</width>
+    <height>1000</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1600</width>
+    <height>1000</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1600</width>
+    <height>1000</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>PlantCare_Studio</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="stop_button">
+    <property name="geometry">
+     <rect>
+      <x>25</x>
+      <y>0</y>
+      <width>220</width>
+      <height>120</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: lightgray; color: black; border: 2px solid black;</string>
+    </property>
+    <property name="text">
+     <string>Emergency Stop</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="battery_label">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>0</y>
+      <width>220</width>
+      <height>120</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: yellow; color: black; border: 3px solid gray;</string>
+    </property>
+    <property name="text">
+     <string>Battery: 50%</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="fill_level_label">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>0</y>
+      <width>220</width>
+      <height>120</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: lightblue; color: black; border: 3px solid gray;</string>
+    </property>
+    <property name="text">
+     <string>Tank: Full</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="status_label">
+    <property name="geometry">
+     <rect>
+      <x>800</x>
+      <y>0</y>
+      <width>361</width>
+      <height>120</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: orange; color: black; border: 3px solid gray;</string>
+    </property>
+    <property name="text">
+     <string>Connection Status: Idle</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ur5_button">
+    <property name="geometry">
+     <rect>
+      <x>1180</x>
+      <y>0</y>
+      <width>190</width>
+      <height>120</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: lightgray; color: black; border: 2px solid grey;</string>
+    </property>
+    <property name="text">
+     <string>UR5_Camera</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="action_log_button">
+    <property name="geometry">
+     <rect>
+      <x>1390</x>
+      <y>0</y>
+      <width>190</width>
+      <height>120</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: lightgray; color: black; border: 2px solid grey;</string>
+    </property>
+    <property name="text">
+     <string>Action Log</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="plant_map_placeholder" native="true">
+    <property name="geometry">
+     <rect>
+      <x>25</x>
+      <y>140</y>
+      <width>1025</width>
+      <height>650</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: lightblue;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ridgeback_status_label">
+    <property name="geometry">
+     <rect>
+      <x>25</x>
+      <y>805</y>
+      <width>500</width>
+      <height>65</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #f2f2f2; color: black; border: 2px solid gray; padding-left: 16px;</string>
+    </property>
+    <property name="text">
+     <string>Ridgeback status:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="dispense_progress_label">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>805</y>
+      <width>500</width>
+      <height>65</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #f2f2f2; color: black; border: 2px solid gray; padding-left: 16px;</string>
+    </property>
+    <property name="text">
+     <string>Pump inactive</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="queue_text_placeholder">
+    <property name="geometry">
+     <rect>
+      <x>1075</x>
+      <y>140</y>
+      <width>440</width>
+      <height>500</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="send_button">
+    <property name="geometry">
+     <rect>
+      <x>1080</x>
+      <y>660</y>
+      <width>231</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: lightgreen; border: 3px solid black;</string>
+    </property>
+    <property name="text">
+     <string>Send to Ridgeback</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="reject_button">
+    <property name="geometry">
+     <rect>
+      <x>1340</x>
+      <y>660</y>
+      <width>180</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: lightcoral; border: 3px solid black;</string>
+    </property>
+    <property name="text">
+     <string>Reject Plant</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="view_map_button">
+    <property name="geometry">
+     <rect>
+      <x>1100</x>
+      <y>780</y>
+      <width>180</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: lightgray; color: black; border: 2px solid grey;</string>
+    </property>
+    <property name="text">
+     <string>View map</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="resume_dispatch_button">
+    <property name="geometry">
+     <rect>
+      <x>1310</x>
+      <y>780</y>
+      <width>211</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #d9f0d8; color: black; border: 2px solid grey;</string>
+    </property>
+    <property name="text">
+     <string>Resume dispatch</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="dispatch_warning_label">
+    <property name="geometry">
+     <rect>
+      <x>25</x>
+      <y>890</y>
+      <width>1530</width>
+      <height>45</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>13</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #fff2cc; color: #8a1f11; border: 2px solid #d6b656; padding-left: 16px;</string>
+    </property>
+    <property name="text">
+     <string>EMERGENCY STOP PRESSED. PRESS RESUME DISPATCH TO CONTINUE</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
