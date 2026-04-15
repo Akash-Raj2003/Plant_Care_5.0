@@ -1,0 +1,89 @@
+Time,Event
+16:33:16,Plant Node 1 is offline
+16:33:16,Plant Node 2 is offline
+16:33:16,Plant Node 3 is offline
+16:33:16,Plant Node 4 is offline
+16:33:16,Plant Node 5 is offline
+16:33:16,Plant Node 6 is offline
+16:33:16,Plant Node 7 is offline
+16:33:16,Plant Node 8 is offline
+16:33:16,Plant Node 9 is offline
+16:33:16,Plant Node 10 is offline
+16:33:16,Plant Node 11 is offline
+16:33:16,Plant Node 12 is offline
+16:33:16,Plant Node 13 is offline
+16:33:16,Plant Node 14 is offline
+16:33:16,Plant Node 15 is offline
+16:33:16,Plant Node 16 is offline
+16:33:16,Plant Node 17 is offline
+16:33:16,Plant Node 18 is offline
+16:33:16,Plant Node 19 is offline
+16:33:16,Plant Node 20 is offline
+16:33:16,Plant Node 21 is offline
+16:33:16,Plant Node 22 is offline
+16:33:16,Plant Node 23 is offline
+16:33:16,Plant Node 24 is offline
+16:33:16,Plant Node 25 is offline
+16:33:16,Plant Node 26 is offline
+16:33:16,Plant Node 27 is offline
+16:33:16,Plant Node 28 is offline
+16:33:16,Plant Node 29 is offline
+16:33:16,Plant Node 30 is offline
+16:33:16,Plant Node 31 is offline
+16:33:16,Plant Node 32 is offline
+16:33:16,Plant Node 33 is offline
+16:33:16,Plant Node 34 is offline
+16:33:16,Plant Node 35 is offline
+16:33:16,Plant Node 36 is offline
+16:33:16,Plant Node 37 is offline
+16:33:16,Plant Node 38 is offline
+16:33:16,Plant Node 39 is offline
+16:33:16,Plant Node 40 is offline
+16:33:16,Plant Node 41 is offline
+16:33:16,Plant Node 42 is offline
+16:33:16,Plant Node 43 is offline
+16:33:16,Plant Node 44 is offline
+16:33:16,Plant Node 45 is offline
+16:33:16,Plant Node 46 is offline
+16:33:16,Plant Node 47 is offline
+16:33:16,Plant Node 48 is offline
+16:33:58,Plant 1 back online
+16:33:58,Plant 1 reported UNDERWATERED from bridge (moisture 0.0)
+16:34:53,Plant 1 reported UNDERWATERED from bridge (moisture 4.0)
+16:34:54,Plant 1 reported UNDERWATERED from bridge (moisture 19.0)
+16:34:55,Plant 1 reported UNDERWATERED from bridge (moisture 24.0)
+16:34:56,Plant 1 reported UNDERWATERED from bridge (moisture 30.0)
+16:34:57,Plant 1 reported UNDERWATERED from bridge (moisture 25.0)
+16:34:58,Plant 1 reported UNDERWATERED from bridge (moisture 33.0)
+16:34:59,Plant 1 reported UNDERWATERED from bridge (moisture 40.0)
+16:35:00,Plant 1 reported UNDERWATERED from bridge (moisture 10.0)
+16:35:01,Plant 1 reported UNDERWATERED from bridge (moisture 37.0)
+16:35:03,Plant 1 reported UNDERWATERED from bridge (moisture 36.0)
+16:35:04,Plant 1 reported UNDERWATERED from bridge (moisture 33.0)
+16:35:05,Plant 1 reported UNDERWATERED from bridge (moisture 35.0)
+16:35:08,Plant 1 reported UNDERWATERED from bridge (moisture 38.0)
+16:35:09,Plant 1 reported UNDERWATERED from bridge (moisture 35.0)
+16:35:10,Plant 1 reported UNDERWATERED from bridge (moisture 0.0)
+16:35:11,Plant 1 reported WATERED from bridge (moisture 54.0)
+16:35:12,Plant 1 reported WATERED from bridge (moisture 60.0)
+16:35:13,Plant 1 reported OVERWATERED from bridge (moisture 67.0)
+16:35:14,Plant 1 reported OVERWATERED from bridge (moisture 66.0)
+16:35:17,Plant 1 reported OVERWATERED from bridge (moisture 64.0)
+16:35:18,Plant 1 reported UNDERWATERED from bridge (moisture 0.0)
+16:36:00,Plant 1 offline (no data for 5s)
+16:36:05,Plant 1 back online
+16:36:57,Plant 1 reported UNDERWATERED from bridge (moisture 25.0)
+16:36:58,Plant 1 reported UNDERWATERED from bridge (moisture 0.0)
+16:36:59,Plant 1 reported UNDERWATERED from bridge (moisture 22.0)
+16:37:01,Plant 1 reported UNDERWATERED from bridge (moisture 0.0)
+16:37:03,Plant 1 reported UNDERWATERED from bridge (moisture 23.0)
+16:37:04,Plant 1 reported UNDERWATERED from bridge (moisture 21.0)
+16:37:05,Plant 1 reported UNDERWATERED from bridge (moisture 17.0)
+16:37:06,Plant 1 reported UNDERWATERED from bridge (moisture 0.0)
+16:37:12,Plant 1 offline (no data for 5s)
+16:37:16,Plant 1 back online
+16:37:17,Plant 1 reported UNDERWATERED from bridge (moisture 40.0)
+16:37:18,Plant 1 reported UNDERWATERED from bridge (moisture 0.0)
+16:37:46,User decided to reject Plant 1
+16:37:47,Plant 1 reported UNDERWATERED from bridge (moisture 0.0)
+16:38:06,User sent Plant 0001 to simulated Ridgeback as Plant_001

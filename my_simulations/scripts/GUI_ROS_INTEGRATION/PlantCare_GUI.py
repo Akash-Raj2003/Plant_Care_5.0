@@ -284,26 +284,14 @@ class ActionLogDialog(QDialog):
         exit_button.setStyleSheet("background-color: lightgray;")
         exit_button.clicked.connect(self.close)
 
-        self.report_status_label = QLabel("", self)
-        self.report_status_label.setGeometry(460, 655, 260, 30)
-        self.report_status_label.setFont(QFont("Arial", 14, QFont.Bold))
-        self.report_status_label.setStyleSheet("color: green;")
-        self.report_status_label.setAlignment(Qt.AlignCenter)
-        self.report_status_label.hide()
-
         report_button = QPushButton("Generate Report", self)
-        report_button.setGeometry(500, 700, 220, 80)
+        report_button.setGeometry(525, 700, 180, 80)
         report_button.setFont(QFont("Arial", 16))
         report_button.setStyleSheet("background-color: lightgray;")
-        report_button.clicked.connect(self.handle_generate_report)
+        report_button.clicked.connect(self.generate_report)
 
     def refresh(self):
         self.text_area.setPlainText("\n".join(self.action_history))
-
-    def handle_generate_report(self):
-        self.generate_report()
-        self.report_status_label.setText("Generated report!")
-        self.report_status_label.show()
 
 
 class RVizEmbedDialog(QDialog):

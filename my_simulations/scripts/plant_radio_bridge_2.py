@@ -85,9 +85,8 @@ def main():
     # -------------------------
     # MQTT settings
     # -------------------------
-    mqtt_broker = "192.168.112.85"      # Change this to your broker IP if needed
+    mqtt_broker = "192.168.241.85"      # Change this to your broker IP if needed
     mqtt_port = 1883
-    mqtt_topic = "/plant/moisture_alert"
     # Open serial connection to Arduino
     try:
         ser = serial.Serial(serial_port, serial_baud, timeout=1)
@@ -126,7 +125,7 @@ def main():
         return
 
     last_logged_publish = None
-    last_mqtt_payload = None
+    last_mqtt_payload_by_topic = {}
 
     while not rospy.is_shutdown():
         if ser.in_waiting > 0:
@@ -160,12 +159,13 @@ def main():
                     "n_dilution_ratio": n_dilution_ratio_callback.current_value,
                     "n_concentration": n_concentration_callback.current_value,
                 }
+                mqtt_topic = f"/plant/moisture_alert_{msg.plant_id}"
 
-                last_mqtt_payload = publish_mqtt_if_changed(
+                last_mqtt_payload_by_topic[mqtt_topic] = publish_mqtt_if_changed(
                     mqtt_client,
                     mqtt_topic,
                     mqtt_payload,
-                    last_mqtt_payload,
+                    last_mqtt_payload_by_topic.get(mqtt_topic),
                 )
 
                 publish_key = (

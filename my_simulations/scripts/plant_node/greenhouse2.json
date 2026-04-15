@@ -1,0 +1,26 @@
+{
+    "plant 1": {
+        "plant_id": 1,
+        "x": 2.322,
+        "y": -1.211,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "plant 2": {
+        "plant_id": 2,
+        "x": -2.0,
+        "y": -3.544,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    },
+    "plant 3": {
+        "plant_id": 3,
+        "x": 5.431,
+        "y": 2.881,
+        "z": 0.0,
+        "moisture_level": 0.0,
+        "moisture_alert": false
+    }
+}

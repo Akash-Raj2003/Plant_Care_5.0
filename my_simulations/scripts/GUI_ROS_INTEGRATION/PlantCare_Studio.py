@@ -1,24 +1,15 @@
 #!/usr/bin/env python3
 
-import actionlib
-import json
 import sys
 import tempfile
 from datetime import datetime
 from pathlib import Path
 
-SCRIPT_DIR = Path(__file__).resolve().parent
-if str(SCRIPT_DIR) not in sys.path:
-    sys.path.insert(0, str(SCRIPT_DIR))
-
 import rospy
 import serial
-from geometry_msgs.msg import Quaternion
-from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
-from std_msgs.msg import Float32, Int32, String
+from std_msgs.msg import Int32, String
 from my_simulations.msg import dispensingActionFeedback
 from plant_msgs.msg import PlantMoisture
-from tf.transformations import quaternion_from_euler
 import yaml
 from PyQt5 import uic
 from PyQt5.QtCore import QTimer, Qt, pyqtSignal
@@ -40,14 +31,12 @@ from PlantCare_GUI import (
     STARTUP_GRACE_S,
 )
 
+
+SCRIPT_DIR = Path(__file__).resolve().parent
 UI_PATH = SCRIPT_DIR / "PlantCare_Studio.ui"
-CONFIG_DIR = SCRIPT_DIR.parent.parent / "config"
 RIDGEBACK_STATE_TOPIC = "/ridgeback/state"
 DISPENSE_FEEDBACK_TOPIC = "/dispense_water/feedback"
 PLANT_MOISTURE_TOPIC = "/plant/moisture_alert"
-RELATIVE_HUMIDITY_TOPIC = "/plant/relative_humidity"
-N_DILUTION_RATIO_TOPIC = "/plant/n_dilution_ratio"
-N_CONCENTRATION_TOPIC = "/plant/n_concentration"
 GUI_COMMAND_TOPIC = "/plantcare/gui_command"
 GUI_EMERGENCY_STOP = "emergency_stop"
 GUI_RESUME_DISPATCH = "resume_dispatch"
@@ -172,12 +161,10 @@ class EmbeddedMainRVizWidget(QWidget):
 class PlantCareStudio(QMainWindow):
     plant_moisture_received = pyqtSignal(int, bool, float)
 
-    def __init__(self, greenhouse_name="greenhouse3"):
+    def __init__(self):
         super().__init__()
         uic.loadUi(str(UI_PATH), self)
 
-        self.greenhouse_name = greenhouse_name
-        self.greenhouse_config_path = CONFIG_DIR / f"{greenhouse_name}.json"
         self.ser = None
         self.selected_plant = None
         self.action_history = []
@@ -190,12 +177,7 @@ class PlantCareStudio(QMainWindow):
         self.rviz_dialog = None
         self.rviz_panel = None
         self.gui_command_publisher = None
-        self.move_base_client = None
-        self.relative_humidity_publisher = None
-        self.n_dilution_ratio_publisher = None
-        self.n_concentration_publisher = None
         self.dispatch_interrupted = False
-        self.sim_plant_map = self._load_sim_plant_map()
         self.plant_moisture_received.connect(self._handle_plant_moisture_update)
 
         self._replace_placeholders()
@@ -243,9 +225,6 @@ class PlantCareStudio(QMainWindow):
         self.reject_button.clicked.connect(self.reject_plant)
         self.view_map_button.clicked.connect(self.toggle_map_view)
         self.resume_dispatch_button.clicked.connect(self.resume_dispatch)
-        self.relative_humidity_input.editingFinished.connect(self.publish_relative_humidity)
-        self.n_dilution_ratio_input.editingFinished.connect(self.publish_n_dilution_ratio)
-        self.n_concentration_input.editingFinished.connect(self.publish_n_concentration)
         self.queue_text.lineClicked.connect(self.on_queue_click)
 
     def _connect_serial(self):
@@ -260,21 +239,6 @@ class PlantCareStudio(QMainWindow):
         self.gui_command_publisher = rospy.Publisher(
             GUI_COMMAND_TOPIC,
             String,
-            queue_size=10,
-        )
-        self.relative_humidity_publisher = rospy.Publisher(
-            RELATIVE_HUMIDITY_TOPIC,
-            Float32,
-            queue_size=10,
-        )
-        self.n_dilution_ratio_publisher = rospy.Publisher(
-            N_DILUTION_RATIO_TOPIC,
-            Float32,
-            queue_size=10,
-        )
-        self.n_concentration_publisher = rospy.Publisher(
-            N_CONCENTRATION_TOPIC,
-            Float32,
             queue_size=10,
         )
         self.ridgeback_state_subscriber = rospy.Subscriber(
@@ -300,108 +264,6 @@ class PlantCareStudio(QMainWindow):
 
     def set_status(self, text):
         self.status_label.setText(text)
-
-    def _load_sim_plant_map(self):
-        try:
-            with self.greenhouse_config_path.open("r", encoding="utf-8") as greenhouse_file:
-                greenhouse_data = json.load(greenhouse_file)
-        except Exception as exc:
-            rospy.logwarn(
-                "Unable to load %s plant map from %s: %s",
-                self.greenhouse_name,
-                self.greenhouse_config_path,
-                exc,
-            )
-            return {}
-
-        plant_map = {}
-        for plant_key in greenhouse_data:
-            if not plant_key.startswith("Plant_"):
-                continue
-
-            try:
-                plant_number = int(plant_key.split("_", 1)[1])
-            except ValueError:
-                continue
-
-            plant_info = greenhouse_data[plant_key]
-            plant_map[plant_number] = {
-                "key": plant_key,
-                "x": float(plant_info["x"]),
-                "y": float(plant_info["y"]),
-                "yaw": float(plant_info.get("yaw", 0.0) or 0.0),
-            }
-
-        return plant_map
-
-    def _ensure_move_base_client(self):
-        if self.move_base_client is None:
-            self.move_base_client = actionlib.SimpleActionClient("move_base", MoveBaseAction)
-
-        if self.move_base_client.wait_for_server(rospy.Duration(2.0)):
-            return True
-
-        self.set_status("Status: move_base action server unavailable")
-        return False
-
-    def _build_move_base_goal(self, plant_target):
-        goal = MoveBaseGoal()
-        goal.target_pose.header.frame_id = "map"
-        goal.target_pose.header.stamp = rospy.Time.now()
-        goal.target_pose.pose.position.x = plant_target["x"]
-        goal.target_pose.pose.position.y = plant_target["y"]
-
-        qx, qy, qz, qw = quaternion_from_euler(0.0, 0.0, plant_target["yaw"])
-        goal.target_pose.pose.orientation = Quaternion(qx, qy, qz, qw)
-        return goal
-
-    def publish_relative_humidity(self):
-        raw_value = self.relative_humidity_input.text().strip()
-        if not raw_value:
-            return
-
-        try:
-            humidity = float(raw_value)
-        except ValueError:
-            self.set_status("Status: Relative humidity must be numeric")
-            return
-
-        if self.relative_humidity_publisher is not None:
-            self.relative_humidity_publisher.publish(humidity)
-        self.set_status(f"Status: Relative humidity set to {humidity:.1f}")
-        self.log_event(f"Relative humidity updated to {humidity:.1f}")
-
-    def publish_n_dilution_ratio(self):
-        raw_value = self.n_dilution_ratio_input.text().strip()
-        if not raw_value:
-            return
-
-        try:
-            n_dilution_ratio = float(raw_value)
-        except ValueError:
-            self.set_status("Status: N dilution ratio must be numeric")
-            return
-
-        if self.n_dilution_ratio_publisher is not None:
-            self.n_dilution_ratio_publisher.publish(n_dilution_ratio)
-        self.set_status(f"Status: N dilution ratio set to {n_dilution_ratio:.1f}")
-        self.log_event(f"N dilution ratio updated to {n_dilution_ratio:.1f}")
-
-    def publish_n_concentration(self):
-        raw_value = self.n_concentration_input.text().strip()
-        if not raw_value:
-            return
-
-        try:
-            n_concentration = float(raw_value)
-        except ValueError:
-            self.set_status("Status: N concentration must be numeric")
-            return
-
-        if self.n_concentration_publisher is not None:
-            self.n_concentration_publisher.publish(n_concentration)
-        self.set_status(f"Status: N concentration set to {n_concentration:.1f}")
-        self.log_event(f"N concentration updated to {n_concentration:.1f}")
 
     def _set_ridgeback_status(self, state_value):
         if state_value is None:
@@ -586,26 +448,14 @@ class PlantCareStudio(QMainWindow):
             self.set_status("Status: Click a plant in the job queue first")
             return
 
-        mapped_plant = self.sim_plant_map.get(self.selected_plant)
-        if mapped_plant is None:
-            self.set_status(
-                f"Status: Plant {self.selected_plant:04d} is not mapped in {self.greenhouse_name}"
-            )
-            return
-
-        if not self._ensure_move_base_client():
-            return
-
-        self.move_base_client.send_goal(self._build_move_base_goal(mapped_plant))
+        if self.ser:
+            self.ser.write(f"RIDGEBACK,{self.selected_plant}\n".encode())
+            self.ser.flush()
 
         sent_plant = self.selected_plant
         self.delete_plant_line(sent_plant)
-        self.set_status(
-            f"Status: Sent Plant {sent_plant:04d} to simulated Ridgeback as {mapped_plant['key']}"
-        )
-        self.log_event(
-            f"User sent Plant {sent_plant:04d} to simulated Ridgeback as {mapped_plant['key']}"
-        )
+        self.set_status(f"Status: Sent Plant {sent_plant} to Ridgeback")
+        self.log_event(f"User decided to water Plant {sent_plant}")
         self.selected_plant = None
 
     def reject_plant(self):
@@ -616,7 +466,7 @@ class PlantCareStudio(QMainWindow):
         rejected_plant = self.selected_plant
         self.delete_plant_line(rejected_plant)
         self.set_status(f"Status: Rejected Plant {rejected_plant}")
-        self.set_plant(rejected_plant, 50)
+        self.set_plant(rejected_plant, 2)
         self.last_status[rejected_plant] = 2
         self.log_event(f"User decided to reject Plant {rejected_plant}")
         self.selected_plant = None
@@ -698,10 +548,8 @@ def main():
     if not rospy.core.is_initialized():
         rospy.init_node("plantcare_studio", anonymous=True, disable_signals=True)
 
-    args = rospy.myargv(argv=sys.argv)
-    greenhouse_name = args[1] if len(args) > 1 else "greenhouse3"
     app = QApplication(sys.argv)
-    window = PlantCareStudio(greenhouse_name)
+    window = PlantCareStudio()
     window.show()
     sys.exit(app.exec_())
 
